@@ -5,4 +5,4 @@ export default {
     'at-rule-no-unknown': null,
     'at-rule-no-deprecated': null
   }
-}
+};
