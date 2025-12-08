@@ -1,1 +1,9 @@
 @import 'tailwindcss';
+
+.test-on {
+  background: #000;
+}
+
+.sample {
+  @apply bg-amber-500;
+}
