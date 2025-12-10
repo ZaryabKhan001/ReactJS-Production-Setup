@@ -1,4 +1,4 @@
-import Navbar from '../../../shared/components/Navbar';
+import Navbar from '@shared/components/Navbar';
 
 const FormInput = () => {
   return (
