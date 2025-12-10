@@ -11,6 +11,7 @@
     "lint:stylelint": "stylelint **/*.css",
     "dev": "vite --mode development",
     "test": "vitest --mode test",
+    "test:coverage": "vitest run --coverage --mode test",
     "build": "tsc -b && vite build --mode production",
     "preview": "vite preview --mode production"
   },
@@ -32,6 +33,7 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "@vitest/coverage-v8": "^4.0.15",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^7.0.1",
