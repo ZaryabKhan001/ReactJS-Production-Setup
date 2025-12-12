@@ -71,10 +71,10 @@ export default defineConfig(({ mode }) => {
         include: ['src/**/*.ts', 'src/**/*.tsx'],
         exclude: ['coverage', 'dist', 'build', 'src/setupTests.ts', 'src/**/*.{test,spec}.{ts,tsx}'],
         thresholds: {
-          statements: 20,
-          branches: 20,
-          functions: 20,
-          lines: 20
+          statements: 80,
+          branches: 80,
+          functions: 80,
+          lines: 80
         }
       }
     },
