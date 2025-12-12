@@ -9,6 +9,7 @@
     "format:check": "prettier --check .",
     "format:fix": "prettier --write .",
     "lint:stylelint": "stylelint **/*.css",
+    "type-check": "tsc --noEmit",
     "dev": "vite --mode development",
     "test": "vitest --mode test",
     "test:coverage": "vitest run --coverage --mode test",
