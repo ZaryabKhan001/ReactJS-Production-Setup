@@ -4,17 +4,23 @@ import { defineConfig, loadEnv, type ServerOptions } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 
 type TMode = 'development' | 'production' | 'test';
 
 interface AppEnv {
   PORT: string;
   VITE_ENV: TMode;
+  VITE_SENTRY_DSN: string;
+  SENTRY_TOKEN: string;
 }
 
 const validateEnv = (envMode: TMode, env: AppEnv) => {
   const requiredVars: (keyof AppEnv)[] = ['PORT', 'VITE_ENV'];
 
+  if (envMode === 'production') {
+    requiredVars.push('VITE_SENTRY_DSN', 'SENTRY_TOKEN');
+  }
   for (const key of requiredVars) {
     if (!env[key]) {
       throw new Error(`${key} is missing. Please define it in your .env.${envMode}`);
@@ -42,7 +48,19 @@ export default defineConfig(({ mode }) => {
     open: true
   };
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(),
+      tailwindcss(),
+      env.VITE_ENV === 'production' &&
+        sentryVitePlugin({
+          org: 'zaryab-zubair',
+          project: 'react-production-setup',
+          authToken: env.SENTRY_TOKEN,
+          sourcemaps: {
+            filesToDeleteAfterUpload: 'dist/assets/**/*.map'
+          }
+        })
+    ],
     test: {
       globals: true,
       environment: 'jsdom',
@@ -70,6 +88,7 @@ export default defineConfig(({ mode }) => {
     preview: configOptions,
     build: {
       minify: true,
+      sourcemap: env.VITE_ENV === 'production',
       rollupOptions: {
         external: [/.*\.(test|spec)\.(ts|tsx)$/]
       }
