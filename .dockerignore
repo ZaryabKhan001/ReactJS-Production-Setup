@@ -1,0 +1,38 @@
+# Node modules (we'll install inside the container)
+node_modules
+npm-debug.log
+yarn-error.log
+.pnpm-store
+
+# Local environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+logs
+*.log
+
+# Git
+.git
+.gitignore
+
+# Editor or OS files
+.DS_Store
+.idea
+.vscode
+
+# Build outputs (React/Next build will create its own in container)
+build
+.next
+out
+
+# Coverage and test reports
+coverage
+*.test.js
+*.spec.js
+
+# Misc
+*.md
