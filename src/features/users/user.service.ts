@@ -1,5 +1,5 @@
 import { apiClient } from '@lib/axiosInstance';
-import { userSchema } from '../schema/schema';
+import { userSchema } from './user.schema';
 
 export const fetchUsers = async () => {
   const res = await apiClient.get('/users');

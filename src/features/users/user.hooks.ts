@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import type { SignupFormData, User } from '../schema/schema';
-import { fetchUsers, fetchUser, createUser } from '../service/api';
+import type { SignupFormData, User } from './user.schema';
+import { fetchUsers, fetchUser, createUser } from './user.service';
 
 export const useUsers = () => {
   return useQuery<User[], Error>({

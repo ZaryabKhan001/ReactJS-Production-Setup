@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { initSentry } from '@shared/configs/sentry.ts';
-import { Providers } from '@shared/components/providers/providers.tsx';
+import { Providers } from '@shared/components/index.ts';
 
 initSentry();
 

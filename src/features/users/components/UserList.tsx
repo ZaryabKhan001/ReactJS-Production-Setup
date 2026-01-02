@@ -1,4 +1,4 @@
-import { useUsers } from '../hooks/user.hooks';
+import { useUsers } from '../user.hooks';
 
 export const UserList = () => {
   const { data: users, isLoading, isError, error } = useUsers();
