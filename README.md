@@ -1,73 +1,174 @@
-# React + TypeScript + Vite
+# 📦 ReactJS Production Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## A **production‑ready starter template** for building scalable React + TypeScript web applications using **Vite**, with professional tooling including **Linting, Prettier, Husky, CommitLint, and CI/CD workflows**.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ⚡ **React (v18+) + TypeScript** for robust and type‑safe frontend development
+- 🚀 **Vite** for ultra‑fast development server and optimized production builds
+- 📏 **ESLint + Prettier** for consistent code quality and formatting
+- 🪝 **Husky + lint‑staged** for pre‑commit checks and automated code formatting
+- 📌 **commitlint** with conventional commit rules for clean commit history
+- 📦 **.env example** for managing environment variables securely
+- 🐱‍🏍 **RHF + ZOD** Enabled Best Form handling
+- 🌎 **Tanstack query** For efficiently calling Server
+- 📦 **Zustand** for managing server side state
+- 🐳 **Dockerfile** for containerized production deployment
+- 📈 Optional **GitHub Actions workflows** for CI/CD automation
 
-## React Compiler
+This setup is designed to scale across real‑world applications and development workflows.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📁 Folder Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname
-      }
-      // other options...
-    }
-  }
-]);
+```
+├── .github/                 # GitHub Actions workflows
+├── .husky/                  # Pre‑commit hooks
+├── public/                  # Static assets
+├── src/                     # Application source
+│   ├── shared/              # All the stuff which can be used by whole application
+│   ├── features/            # feature based devision of concerns
+│   ├── router.tsx
+│   ├── index.css
+│   ├── App.tsx
+│   └── main.tsx
+├── .env.example             # Example environment variables
+├── .eslintrc.js             # ESLint config
+├── .prettierrc              # Prettier config
+├── tsconfig.json            # TypeScript config
+├── vite.config.ts           # Vite config
+├── Dockerfile               # Optional Docker config
+└── package.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+## 🛠 Installation
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname
-      }
-      // other options...
-    }
-  }
-]);
+1. **Clone the repo**
+
+   ```bash
+   git clone https://github.com/ZaryabKhan001/ReactJS-Production-Setup.git
+   cd ReactJS-Production-Setup
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   # or
+   pnpm install
+   # or
+   yarn
+   ```
+
+3. **Create environment variables**
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Then edit `.env` with your own values.
+
+---
+
+## ⚡ Development
+
+Start the development server:
+
+```bash
+npm run dev
 ```
+
+Hot‑Reloading is enabled via Vite — you’ll see updates instantly in the browser. ([vitejs][2])
+
+---
+
+## 🧪 Production Build
+
+To generate an optimized production bundle:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+This generates static assets (HTML, CSS, JS) ready for deployment to any static host.
+
+---
+
+## 🧹 Code Quality Tools
+
+### 🧑‍💻 ESLint
+
+Lint your codebase:
+
+```bash
+npm run lint:eslint
+```
+
+### 🧼 Prettier
+
+Auto‑format code:
+
+```bash
+npm run format:fix
+```
+
+---
+
+## 🐶 Commit Hooks & Git Hooks
+
+This setup uses **Husky** for Git hooks:
+
+- Pre‑commit: runs `lint` and `format`
+- Commit message validation: uses `commitlint` for conventional commits
+
+These tools enforce quality and maintain history consistency.
+
+---
+
+## 📦 Docker (Optional)
+
+This repo includes a Dockerfile so you can containerize the app:
+
+```bash
+docker build -t react‑app .
+docker run -p 5173:4173 react‑app
+```
+
+You can extend this to include multi‑stage builds and NGINX for production. ([GeeksforGeeks][3])
+
+---
+
+## 📦 CI/CD (Optional)
+
+Add GitHub Actions workflows inside `.github/workflows` to automate:
+
+- Lint + Test runs on pull requests
+- Build jobs on `main` branch
+- Deployment to hosting platforms (Netlify, Vercel, GH‑Pages, etc.)
+
+---
+
+## 📚 Best Practices Included
+
+✅ **Type‑safe React + Vite setup**
+✅ **Linting + Formatting rules enforced before commit**
+✅ **Conventional commits for a clean history**
+✅ **Production build flags & optimizations**
+✅ **Scalable project structure**
+
+---
+
+## 📄 License
+
+Distributed under the MIT License.
+
+---
