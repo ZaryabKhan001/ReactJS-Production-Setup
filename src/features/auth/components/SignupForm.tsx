@@ -1,7 +1,7 @@
 import { Form, FormInput, Button } from '@shared/components/index';
-import { signupSchema, type SignupFormData } from '../user.schema';
-import { useCreateUser } from '../user.hooks';
-import { signupFields } from '../user.constants';
+import { signupSchema, type SignupFormData } from '../auth.schema';
+import { useCreateUser } from '../auth.hooks';
+import { signupFields } from '../auth.constants';
 
 export function SignupForm() {
   const { mutate, isPending } = useCreateUser();

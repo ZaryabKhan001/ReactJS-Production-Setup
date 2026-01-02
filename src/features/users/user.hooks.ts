@@ -1,6 +1,7 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import type { SignupFormData, User } from './user.schema';
-import { fetchUsers, fetchUser, createUser } from './user.service';
+import { useQuery } from '@tanstack/react-query';
+import type { User } from './index';
+import { fetchUsers, fetchUserById, useUserStore } from './index';
+import { useEffect } from 'react';
 
 export const useUsers = () => {
   return useQuery<User[], Error>({
@@ -11,28 +12,22 @@ export const useUsers = () => {
   });
 };
 
-export const useUser = (id: string) => {
-  return useQuery<User, Error>({
+export const useUserProfile = (id: string) => {
+  const setCurrentUser = useUserStore((state) => state.setCurrentUser);
+  const currentUser = useUserStore((state) => state.currentUser);
+
+  const query = useQuery({
     queryKey: ['user', id],
-    queryFn: () => fetchUser(id),
+    queryFn: () => fetchUserById(id),
     enabled: !!id,
-    staleTime: 1000 * 60,
-    refetchOnWindowFocus: false
+    staleTime: 1000 * 60 * 5
   });
-};
 
-export const useCreateUser = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation<User, Error, SignupFormData>({
-    mutationFn: (data) => createUser(data),
-    onSuccess: (newUser) => {
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-
-      queryClient.setQueryData(['user', newUser.id], newUser);
-    },
-    onError: (error) => {
-      console.error('Failed to create user:', error.message);
+  useEffect(() => {
+    if (query.data) {
+      setCurrentUser(query.data);
     }
-  });
+  }, [query.data, setCurrentUser]);
+
+  return { ...query, currentUser };
 };
